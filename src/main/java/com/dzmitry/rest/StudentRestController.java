@@ -1,6 +1,8 @@
 package com.dzmitry.rest;
 
 import com.dzmitry.entity.Student;
+import com.dzmitry.exception_handling.StudentErrorResponse;
+import com.dzmitry.exception_handling.StudentNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,16 +36,5 @@ public class StudentRestController {
             throw new StudentNotFoundException("Student id not found - " + studentId);
         }
         return students.get(studentId);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException studentNotFoundException) {
-
-        StudentErrorResponse error = new StudentErrorResponse();
-        error.setStatus(HttpStatus.NOT_FOUND.value());
-        error.setMessage(studentNotFoundException.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

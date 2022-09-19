@@ -1,4 +1,4 @@
-package com.dzmitry.rest;
+package com.dzmitry.exception_handling;
 
 public class StudentNotFoundException extends RuntimeException {
 
